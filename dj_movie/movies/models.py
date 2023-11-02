@@ -1,5 +1,7 @@
 from django.db import models
 from datetime import date
+from django.db.models import Avg
+
 
 from django.urls import reverse
 
@@ -79,6 +81,9 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_rating(self):
+        return round(self.ratings.aggregate(Avg('star'))['star__avg'],2)
     
     def get_absolute_url(self):
         return reverse("movie_detail", kwargs={"slug": self.url})
