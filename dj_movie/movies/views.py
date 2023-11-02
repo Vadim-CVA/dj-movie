@@ -23,6 +23,7 @@ class MoviesView(GenreYear,ListView):
 
     model = Movie
     queryset = Movie.objects.filter(draft=False)
+    paginate_by = 9
     
 
 class MovieDetailView(GenreYear,DetailView):
@@ -65,6 +66,7 @@ class FilterMoviesView(GenreYear, ListView):
     """Фильтр фильмов"""
 
     template_name = "movies/movie_list.html"
+    paginate_by = 3
 
     def get_queryset(self):
         my_q = Q()
@@ -72,9 +74,9 @@ class FilterMoviesView(GenreYear, ListView):
             my_q = Q(year__in=self.request.GET.getlist('year'))
         if 'genres' in self.request.GET:
             my_q &= Q(genres__in=self.request.GET.getlist('genres'))
-        queryset = Movie.objects.filter(my_q)
+        queryset = Movie.objects.filter(my_q).distinct()
         return queryset
-    
+        
 
 class AddStarRating(View):
     """Добавление рейтинга фильму"""
@@ -100,7 +102,15 @@ class AddStarRating(View):
             return HttpResponse(status=400)
     
     
+class Search(ListView):
+    '''Поиск фильма'''
+    paginate_by = 3
 
+    def get_queryset(self) -> QuerySet[Any]:
+        return Movie.objects.filter(title__icontains=self.request.GET.get("q"))
 
-
-
+    def get_context_data(self, *args, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = f'&q={self.request.GET.get("q")}'
+        return context
+    
