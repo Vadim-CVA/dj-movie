@@ -83,7 +83,10 @@ class Movie(models.Model):
         return self.title
     
     def get_rating(self):
-        return round(self.ratings.aggregate(Avg('star'))['star__avg'],2)
+        try:
+            return round(self.ratings.aggregate(Avg('star'))['star__avg'],2)
+        except:
+            return "0"
     
     def get_absolute_url(self):
         return reverse("movie_detail", kwargs={"slug": self.url})

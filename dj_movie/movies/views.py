@@ -9,6 +9,7 @@ from .forms import ReviewForm,RatingForm
 from django.db.models.query import Q
 
 
+
 class GenreYear:
     """Жанры и года выхода фильмов"""
     def get_genres(self):
@@ -34,7 +35,8 @@ class MovieDetailView(GenreYear,DetailView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        context["star_form"] = RatingForm() 
+        context["star_form"] = RatingForm()
+        context["form"] = ReviewForm() 
         return context
         
 
