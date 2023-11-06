@@ -382,7 +382,7 @@ li > a:only-child:after {
 /*--/banner --*/
 
 .main-banner {
-    background: url(../static/banner2.jpg) no-repeat center;
+    background: url(../images/banner2.jpg) no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -393,7 +393,7 @@ li > a:only-child:after {
 }
 
 .main-banner.inner {
-    background: url(../static/banner2.jpg) no-repeat center;
+    background: url(../images/banner1.jpg) no-repeat center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -403,16 +403,16 @@ li > a:only-child:after {
     min-height: 20em;
 }
 
-.bg1 {
+/* .bg1 {
     background-color: rgba(0, 0, 0, 0);
     margin-top: 0;
-    background-image: url('../banner1.jpg');
+    background-image: url('../images/banner1.jpg');
 }
 .bg2 {
     background-color: rgba(0, 0, 0, 0);
     margin-top: 0;
-    background-image: url('../banner2.jpg');
-}
+    background-image: url('../images/banner2.jpg');
+} */
 
 /*-- place holder --*/
 
